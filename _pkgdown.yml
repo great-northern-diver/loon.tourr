@@ -1,0 +1,22 @@
+reference:
+
+  - title: Basics
+    desc: The tour plot
+    contents:
+    - l_tour
+    - l_tour_pairs
+
+  - title: Layers
+  - subtitle: New statistical summary layers
+    contents:
+    - l_layer_density2d
+    - l_layer_hull
+    - l_layer_trails
+
+  - subtitle: Layer callback function
+    contents:
+    - l_layer_callback
+
+  - title: Useful Accessories
+    contents:
+    - l_getProjection
