@@ -1,0 +1,8 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  classification: classification.html
+  tours: tours.html
+last_built: 2021-03-07T20:56Z
+
