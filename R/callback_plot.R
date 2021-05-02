@@ -8,8 +8,12 @@ callback_plot.l_hist <- function(widget, initialTour, tours, var = 0L, ...) {
     initialTour <- unlist(initialTour)
     # start position
     # update hist
+
+    # for l_hist widget, as the x is modified, the binwidth and origin will be modified as default
     loon::l_configure(widget,
-                      x = initialTour
+                      x = initialTour,
+                      binwidth = widget['binwidth'],
+                      origin = widget['origin']
     )
 
     callback_layer(widget,
@@ -20,7 +24,9 @@ callback_plot.l_hist <- function(widget, initialTour, tours, var = 0L, ...) {
   } else {
     proj <- tours[[var]]
     loon::l_configure(widget,
-                      x = proj
+                      x = proj,
+                      binwidth = widget['binwidth'],
+                      origin = widget['origin']
     )
 
     callback_layer(widget,
