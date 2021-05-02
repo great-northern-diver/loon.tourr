@@ -99,12 +99,13 @@ library(loon.tourr)
 
 ## Introduction
 
-A tour is a motion graphic designed to study the joint distribution of multivariate data [@asimov1985grand]. A sequence of low-dimensional projections is created by a high dimensional data set. Tours are thus used to find interesting projections. Between each plane, interpolation along a geodesic path is provided so that the points in a sub space (e.g. 2D) can be rotated smoothly [@cook2008grand]. In mathematics, $\sm{X}_{n \times p}$ represents the original data set; $\sm{P}_{p \times d}$ is the matrix of projection vectors where $d < p$.
+A tour is a motion graphic designed to study the joint distribution of multivariate data [@asimov1985grand][@buja1986grand]. A sequence of low-dimensional projections is created by a high dimensional data set. Tours are thus used to find interesting projections. Between each plane, interpolation along a geodesic path is provided so that the points in a sub space (e.g. 2D) can be rotated smoothly. In mathematics, $\sm{X}_{n \times p}$ represents the original data set; $\sm{P}_{p \times d}$ is the matrix of projection vectors where $d < p$.
 \[\sm{Y} = \sm{X} \sm{P}\]
 where $\sm{Y}$ is the lower dimensional sub-space.
 
-Software `GGobi` [@cook2007interactive] (as a successor of `XGobi` [@XGobi]) provides such tour projection techniques. Package `rggobi` [@rggobi] brings such functionality in language `R`, however, it has been removed from the CRAN and can only be accessed from the [archive](https://cran.r-project.org/src/contrib/Archive/rggobi/). 
-The package tourr [@tourr] implements geodesic interpolation and basic tour generation functions. The function `animate` provides tour animation as a kinematic sequence of static displays -- plots are generated and then displayed quickly in order.  In an RStudio display, for example, the user can cycle back and forth through the sequence ... but that is all. Unlike earlier tour implementations (e.g. [@rggobi]) no interactive manipulation of the plot elements is possible.
+The tour was **first** implemented in the software `Dataviewer` [@buja1986elements][@hurley1987data][@buja1987data] in Symbolics Lisp machine. A smoothly moving scatterplot could be produced to visualize the tour paths. Then, @swayne1991xgobi implemented software `XGobi` in the **X** Window System, providing portability across **a wide variety of workstations** i.e. X terminals, personal computers, even across a network. Software `GGobi` [@swayne2001ggobi][@cook2007interactive], **redesigned and extended** its ancestor `XGobi`. It  can be embedded in other software, like environment `R`. Package `rggobi` [@rggobi] is an `R` interface of `GGobi`, however, it has been removed from the CRAN and can only be accessed from the [archive](https://cran.r-project.org/src/contrib/Archive/rggobi/). 
+
+Package `tourr` [@tourr] implements geodesic interpolation and variety tour generation functions (i.e. grand tour, guided tour, etc) in `R` language. The function `animate` provides tour animation as a kinematic sequence of static displays -- plots are generated and then displayed quickly in order.  In an RStudio display, for example, the user can cycle back and forth through the sequence ... but that is all. Unlike earlier tour implementations (`rggobi`) no interactive manipulation of the plot elements is possible.
 
 The loon package [@loon] is a toolkit that enables highly interactive data visualization. The package **loon.tourr** adds the full functionality of loon's interactive graphics to `tourr`. For example, this allows interactive selection, colouring, and deactivating of points in the tour display and linking that display with any other loon plot. Interesting projections discovered during the tour can be accessed at any point in the tour. In addition, random tours displaying more than 2 dimensions are also provided using parallel or radial coordinates and scatterplot matrices.
 
@@ -117,7 +118,7 @@ library(MASS, quietly = TRUE)
 kable(head(crabs, 6))
 ```
 
-This plot is interactive. Users can pan, zoom or select on this plot. The default number of random bases is 30 and the steps between two serial projections are 40. So, we have 1200 + 1 (start position) projections in total. To navigate the tour, scroll the leftmost bar down, the projection is transformed from one to another. If, unfortunately, none of the projections is interesting, click the "refresh" button at the left-bottom corner. New random tours are created.
+This plot is interactive. Users can pan, zoom or select on this plot. The default number of random bases is 30 and the steps between two serial projections are 40. So, we have 1200 + 1 (start position) projections in total. To navigate the tour, scroll the rightmost bar down, the projection is transformed from one to another. If, unfortunately, none of the projections is interesting, click the "refresh" button at the left-bottom corner. New random tours are created.
 
 Immediately below the plot, behind the "refresh" button, there are several radio buttons, "data", "variable", "observation" and "sphere" that represent the scaling methods $f$ of $\sm{X}$.  
 
