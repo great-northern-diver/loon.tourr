@@ -1,5 +1,7 @@
 l_path_name <- function(x, child) {
 
+  if(length(x) == 0) return(character(0L))
+
   if(inherits(x, "l_tour") || inherits(x, "l_tour_compound")) {
     attrName <- attributes(x)$names
     return(attrName[!attrName %in% "projection"])
