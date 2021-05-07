@@ -143,10 +143,12 @@ callback_plot.l_facet <- function(widget, initialTour, tours, var = 0L, ...) {
   labels <- args$labels
   color <- args$color
   group <- args$group
+  lenGroup <- length(group)
 
   canvasRange <- grDevices::extendrange(c(0, 1))
+  lenWidgets <- length(widget)
 
-  lapply(seq(length(widget)),
+  lapply(seq(lenWidgets),
          function(i) {
 
            dotArgs <- args
@@ -167,7 +169,7 @@ callback_plot.l_facet <- function(widget, initialTour, tours, var = 0L, ...) {
                        color = color[[i]],
                        axes = axes[[i]],
                        labels = labels[[i]],
-                       group = group[[i]],
+                       group = if(lenGroup == lenWidgets) group[[i]] else group,
                        l_compound = widget,
                        allTours = tours,
                        allColor = color,
