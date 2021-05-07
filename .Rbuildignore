@@ -11,6 +11,8 @@ NEWS.md
 codecov.yml
 ^_pkgdown\.yml$
 ^docs$
+^man-roxygen$
 ^pkgdown$
 ^codecov\.yml$
 ^\.github$
+
