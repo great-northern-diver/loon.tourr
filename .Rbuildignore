@@ -1,0 +1,16 @@
+loon.tourr.Rproj
+^.*\.Rproj$
+^\.Rproj\.user$
+^doc$
+^Meta$
+.gitignore
+.travis.yml
+_pkgdown.yml
+README.md
+NEWS.md
+codecov.yml
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^codecov\.yml$
+^\.github$
