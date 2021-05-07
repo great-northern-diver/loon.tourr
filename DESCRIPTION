@@ -22,9 +22,9 @@ Imports:
     stats,
     utils,
     grDevices,
-    MASS
+    MASS,
+    loon.ggplot
 Suggests:
-    loon.ggplot,
     class,
     RDRToolbox,
     magrittr,
