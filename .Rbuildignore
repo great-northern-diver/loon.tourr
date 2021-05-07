@@ -1,4 +1,5 @@
 loon.tourr.Rproj
+man-roxygen
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^doc$
