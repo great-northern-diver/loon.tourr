@@ -2,7 +2,7 @@ Package: loon.tourr
 Type: Package
 Title: Tour in Loon
 Version: 0.1.0
-Date: 2019-10-07
+Date: 2021-05-06
 Authors@R: c(person(given = "Zehao", family = "Xu", 
                     email = "z267xu@uwaterloo.ca", 
                     role = c("aut", "cre")),
@@ -26,14 +26,15 @@ Imports:
     loon.ggplot
 Suggests:
     class,
+    RDRToolbox,
     magrittr,
     tidyverse,
     testthat,
     knitr,
     rmarkdown, 
+    markdown,
     covr
 BugReports: https://github.com/z267xu/loon.tourr/issues
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
