@@ -137,7 +137,8 @@ test_that("test callback l_facet", {
 
   callback_plot(widget = widget, initialTour = initialTour,
                 start = start, color = color, group = group,
-                tours = tours, var = var, projections = projections, by = by)
+                tours = tours, var = var, projections = projections,
+                by = by)
 
   expect_true(is(widget, "l_compound"))
 
