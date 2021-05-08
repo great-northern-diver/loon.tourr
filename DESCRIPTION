@@ -1,6 +1,6 @@
 Package: loon.tourr
 Type: Package
-Title: Tour in Loon
+Title: Tour in 'Loon'
 Version: 0.1.0
 Date: 2021-05-06
 Authors@R: c(person(given = "Zehao", family = "Xu", 
@@ -10,14 +10,14 @@ Authors@R: c(person(given = "Zehao", family = "Xu",
                     email = "rwoldford@uwaterloo.ca", 
                     role = "aut")
              )
-Description: Implement tour algorithms in interactive graphical system loon.
+Description: Implement tour algorithms in interactive graphical system 'loon'.
 License: GPL-2
 Depends:
     R (>= 3.4.0),
     tcltk,
     loon (> 1.3.1),
     tourr,
-    methods
+    methods,
 Imports:
     stats,
     utils,

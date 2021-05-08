@@ -99,6 +99,10 @@ order to be displayed. See the examples below.}
 
 \item{...}{named arguments to modify the serialaxes states or layouts, see details.}
 }
+\value{
+an \code{l_tour_compound} object that one can query the \code{loon} states
+and a matrix projection vectors
+}
 \description{
 A nD tour path with a scatterplot matrix (the default tour is a 4D tour;
 by setting `tour_path` to modify the dimension)

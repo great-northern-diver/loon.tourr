@@ -1,5 +1,6 @@
 loon.tourr.Rproj
 man-roxygen
+figures
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^doc$
