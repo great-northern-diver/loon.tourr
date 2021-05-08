@@ -1,6 +1,7 @@
 #' @title Query a loon widget
 #' @description A generic function to query the \code{loon} (tcl) widget from the given target
 #' @param target a \code{loon} object
+#' @return a \code{loon} widget
 #' @examples
 #' if(interactive()) {
 #'   p <- l_tour(iris[, -5])

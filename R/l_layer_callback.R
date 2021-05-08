@@ -5,6 +5,11 @@
 #' @param ... some useful info for the layer configuration (i.e. tours, projections, etc)
 #' @details It is a \code{S3} method. The object class is determined by the layer **label**
 #' @export
+#'
+#' @return this callback function does not return any object. As the
+#' slider bar is scrolled, for the specified layer, the callback function
+#' will be fired and the layer will be configured.
+#'
 #' @examples
 #' if(interactive() && requireNamespace("tourr")) {
 #'   # 1D tour
@@ -24,6 +29,8 @@
 #'       loon::l_configure(layer,
 #'                         x = den$x,
 #'                         y = den$y)
+#'
+#'       invisible()
 #'   }
 #' }
 #'
@@ -129,6 +136,8 @@ l_layer_callback.density2d <- function(target, layer, ...) {
                                  isVisible = isVisible)
            })
   }
+
+  invisible()
 }
 
 #' @export
@@ -151,6 +160,8 @@ l_layer_callback.hull <- function(target, layer, ...) {
     xy <- hull_xy(x, y)
   }
   do.call(loon::l_configure, c(list(target = layer), xy))
+
+  invisible()
 }
 
 #' @export
@@ -185,4 +196,6 @@ l_layer_callback.trails <- function(target, layer, ...) {
     x = lapply(seq(len), function(i) c(xpre[i], xnew[i])),
     y = lapply(seq(len), function(i) c(ypre[i], ynew[i]))
   )
+
+  invisible()
 }

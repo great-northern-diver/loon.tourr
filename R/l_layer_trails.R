@@ -7,6 +7,7 @@
 #' @param ypre the same length of \code{y} representing the last state
 #' @param color the color of the trail
 #' @export
+#' @return an \code{l_layer} widget
 #' @examples
 #' if(interactive()) {
 #' p <- l_tour(iris[, -5], color = iris$Species)

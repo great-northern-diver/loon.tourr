@@ -45,7 +45,7 @@ integer vector.
 The limits of the rectangle covered by the grid as \code{c(xl, xu, yl, yu)}.
 }
 
-\item{color}{the line color of each hull}
+\item{color}{color of each contour}
 
 \item{linewidth}{the line width}
 
@@ -68,6 +68,9 @@ If a logical vector is given of length equal to the number of points,
 then it identifies which points appear (\code{TRUE}) and which do not (\code{FALSE}).}
 
 \item{...}{other arguments to modify \code{l_layer_line}.}
+}
+\value{
+an \code{l_layer} widget
 }
 \description{
 Two-dimensional kernel density estimation with an axis-aligned bivariate normal kernel

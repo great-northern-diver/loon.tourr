@@ -5,6 +5,8 @@
 #' @inheritParams l_tour
 #' @inheritParams loon::l_pairs
 #' @export
+#' @return an \code{l_tour_compound} object that one can query the \code{loon} states
+#' and a matrix projection vectors
 #' @seealso \code{\link{l_pairs}}, \code{\link{l_tour}}
 #' @examples
 #' if(interactive() && requireNamespace('tourr')) {

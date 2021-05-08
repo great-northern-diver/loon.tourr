@@ -43,6 +43,9 @@ then it identifies which points appear (\code{TRUE}) and which do not (\code{FAL
 
 \item{...}{other arguments to modify \code{l_layer_line}.}
 }
+\value{
+an \code{l_layer} widget
+}
 \description{
 Creates a layer which is the subset of points lying on the hull (convex or alpha) of the set of points specified.
 }

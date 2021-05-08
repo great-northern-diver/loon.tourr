@@ -12,7 +12,7 @@
 #' @param group Only used for layers. As we scroll the bar, the layers are re-calculated.
 #' This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).
 #' @param envir the \code{\link{environment}} to use.
-#' @import tourr methods stats loon tcltk
+#' @import tourr methods stats loon tcltk loon.ggplot
 #' @details
 #' \itemize{
 #' \item {tour_path is a tour generator; available tours are \code{\link{grand_tour}},
@@ -40,8 +40,8 @@
 #' data \tab whole matrix scaling\cr
 #' sphere \tab transforming variables to principal components}}
 #' }
-#' @return
-#' \code{l_tour} returns a \code{l_tour} object
+#' @return an \code{l_tour} or an \code{l_tour_compound} object that
+#' one can query the \code{loon} states and a matrix projection vectors
 #' @seealso \code{\link{l_getProjection}}
 #' @export
 #' @examples

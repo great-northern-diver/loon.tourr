@@ -46,6 +46,9 @@ then it identifies which points appear (\code{TRUE}) and which do not (\code{FAL
 
 \item{...}{other arguments to modify \code{l_layer_line}.}
 }
+\value{
+an \code{l_layer} widget
+}
 \description{
 A 2D tour path with trails
 }
