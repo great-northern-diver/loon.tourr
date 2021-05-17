@@ -3,7 +3,7 @@ library(loon.tourr)
 library(tourr)
 
 test_that("test callback l_plot", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   widget <- l_plot(ir)
@@ -15,6 +15,8 @@ test_that("test callback l_plot", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(), numOfTours = 30L,
                                   interpolation = 40L)
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
@@ -30,7 +32,7 @@ test_that("test callback l_plot", {
 })
 
 test_that("test callback l_plot", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   widget <- l_plot(ir)
@@ -42,6 +44,8 @@ test_that("test callback l_plot", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(), numOfTours = 30L,
                                   interpolation = 40L)
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
@@ -57,7 +61,7 @@ test_that("test callback l_plot", {
 })
 
 test_that("test callback l_hist", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   widget <- l_hist(ir)
@@ -69,6 +73,9 @@ test_that("test callback l_hist", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(1L), numOfTours = 30L,
                                   interpolation = 40L)
+
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
@@ -84,7 +91,7 @@ test_that("test callback l_hist", {
 })
 
 test_that("test callback l_serialaxes", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   widget <- l_serialaxes(ir)
@@ -96,6 +103,9 @@ test_that("test callback l_serialaxes", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(3L), numOfTours = 30L,
                                   interpolation = 40L)
+
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
@@ -111,7 +121,7 @@ test_that("test callback l_serialaxes", {
 })
 
 test_that("test callback l_facet", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   by <- data.frame(Species = iris$Species)
@@ -126,6 +136,8 @@ test_that("test callback l_facet", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(), numOfTours = 30L,
                                   interpolation = 40L)
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
 
   tours <- lapply(tours,
@@ -149,7 +161,7 @@ test_that("test callback l_facet", {
 })
 
 test_that("test callback l_pairs", {
-  var <- sample(seq(1200), 1)
+
   # call back l_plot
   ir <- iris[, -5]
   widget <- l_pairs(ir)
@@ -161,6 +173,9 @@ test_that("test callback l_pairs", {
   projections <- interpolate_list(ir, start = start,
                                   tour_path = grand_tour(4L), numOfTours = 30L,
                                   interpolation = 40L)
+
+  var <- sample(seq(length(projections)), 1)
+
   tours <- tour_list(ir, projections)
   dataNames <- colnames(ir)
 
