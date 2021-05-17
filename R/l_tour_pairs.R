@@ -180,8 +180,20 @@ l_tour_pairs <- function(data, scaling = c('data', 'variable', 'observation', 's
                borderwidth = 1,
                relief = "raised"))
 
-  downbutton <- tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                                      file=paste0(path, "/down.png"))
+  downbutton <- tryCatch(
+    expr = {
+      tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                            file=paste0(path, "/down.png"))
+    },
+    error = function(e) {
+      assign("path",
+             file.path(find.package(package = 'loon.tourr'), "inst/images"),
+             envir = env)
+      tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                            file=paste0(path, "/down.png"))
+    }
+  )
+
   # one step down
   onStepDownButton <-  as.character(
     tcltk::tcl('button',

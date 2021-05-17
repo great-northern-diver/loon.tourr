@@ -224,15 +224,19 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
 
   # scale radio button
   scalingVar <- tcltk::tclVar(scaling)
-  scaleRadioButtons <- sapply(as.character(formals(l_tour)[["scaling"]])[-1],
-                              function(scale) {
-                                as.character(
-                                  tcltk::tcl('radiobutton',
-                                             as.character(loon::l_subwin(child,'radiobutton')),
-                                             text = scale,
-                                             variable = scalingVar,
-                                             value = scale))
-                              })
+  scaleRadioButtons <- sapply(
+    as.character(formals(l_tour)[["scaling"]])[-1],
+    function(scale) {
+      as.character(
+        tcltk::tcl('radiobutton',
+                   as.character(loon::l_subwin(child,
+                                               paste0(c('radiobutton', scale),
+                                                      collapse = "-"))
+                   ),
+                   text = scale,
+                   variable = scalingVar,
+                   value = scale))
+    })
 
   path <- file.path(find.package(package = 'loon.tourr'), "images")
 
@@ -250,7 +254,6 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
     }
   )
 
-
   # one step up
   onStepUpButton <-  as.character(
     tcltk::tcl('button',
@@ -260,8 +263,19 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
                borderwidth = 1,
                relief = "raised"))
 
-  downbutton <- tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                                      file=paste0(path, "/down.png"))
+  downbutton <- tryCatch(
+    expr = {
+      tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                            file=paste0(path, "/down.png"))
+    },
+    error = function(e) {
+      assign("path",
+             file.path(find.package(package = 'loon.tourr'), "inst/images"),
+             envir = env)
+      tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                            file=paste0(path, "/down.png"))
+    }
+  )
 
   # one step down
   onStepDownButton <-  as.character(
@@ -328,7 +342,7 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
 
   update <- function(...) {
 
-    # callback functions have side effect by defining the environment
+    # callback functions have side effects
     scalingVar <- tcltk::tclvalue(scalingVar)
     # data, start, initialTour, projections
     # tours, scalingOld are modified
