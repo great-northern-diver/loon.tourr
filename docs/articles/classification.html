@@ -555,14 +555,15 @@ div.csl-indent {
 <div id="method-iii-lle" class="section level3">
 <h3>Method III: LLE</h3>
 <p>LLE (Local Linear Embedding) <span class="citation">(<a href="#ref-roweis2000nonlinear" role="doc-biblioref">Roweis and Saul 2000</a>)</span> begins by finding a set of the nearest neighbors of each point, then computes a set of weights for each point that best describes the point as a linear combination of its neighbors. Finally, it uses an eigenvector-based optimization technique to find the low-dimensional embedding of points.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lle <span class="ot">&lt;-</span> <span class="fu">low_dim_knn_pred</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fun =</span> <span class="cf">function</span>(data, d) {</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">LLE</span>(data, <span class="at">dim =</span> d, <span class="at">k =</span> <span class="dv">5</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        },</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        scalingTrainX, trainY,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        scalingTestX, testY) </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(lle, <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RDRToolbox)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>lle <span class="ot">&lt;-</span> <span class="fu">low_dim_knn_pred</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fun =</span> <span class="cf">function</span>(data, d) {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">LLE</span>(data, <span class="at">dim =</span> d, <span class="at">k =</span> <span class="dv">5</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        },</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        scalingTrainX, trainY,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        scalingTestX, testY) </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(lle, <span class="at">row.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

@@ -90,7 +90,6 @@ path_concat <- function(path1, ..., sep="/") {
   # even sep = "\\" or possibly something else. 
   paste(path1, ..., sep = sep)
 }
-library(RDRToolbox)
 ```
 
 ## Introduction
@@ -253,6 +252,7 @@ kable(PCA, row.names = TRUE,
 LLE (Local Linear Embedding) [@roweis2000nonlinear] begins by finding a set of the nearest neighbors of each point, then computes a set of weights for each point that best describes the point as a linear combination of its neighbors. Finally, it uses an eigenvector-based optimization technique to find the low-dimensional embedding of points.
 
 ```{r LLE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", eval = FALSE}
+library(RDRToolbox)
 lle <- low_dim_knn_pred(2:5, 
                         fun = function(data, d) {
                           LLE(data, dim = d, k = 5)
