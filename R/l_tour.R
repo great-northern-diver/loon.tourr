@@ -238,53 +238,58 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
                    value = scale))
     })
 
-  path <- file.path(find.package(package = 'loon.tourr'), "images")
-
-  upbutton <- tryCatch(
+  onStepUpButton <- tryCatch(
     expr = {
-      tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                            file=paste0(path, "/up.png"))
+      path <- file.path(find.package(package = 'loon.tourr'), "images")
+      upbutton <- tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                                        file=paste0(path, "/up.png"))
+
+      # one step up
+      as.character(
+        tcltk::tcl('button',
+                   as.character(loon::l_subwin(child, 'one step up button')),
+                   image = upbutton,
+                   bg = "grey92",
+                   borderwidth = 1,
+                   relief = "raised"))
+
     },
     error = function(e) {
-      assign("path",
-             file.path(find.package(package = 'loon.tourr'), "inst/images"),
-             envir = env)
-      tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                            file=paste0(path, "/up.png"))
-    }
-  )
-
-  # one step up
-  onStepUpButton <-  as.character(
-    tcltk::tcl('button',
-               as.character(loon::l_subwin(child, 'one step up button')),
-               image = upbutton,
-               bg = "grey92",
-               borderwidth = 1,
-               relief = "raised"))
-
-  downbutton <- tryCatch(
-    expr = {
-      tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                            file=paste0(path, "/down.png"))
-    },
-    error = function(e) {
-      assign("path",
-             file.path(find.package(package = 'loon.tourr'), "inst/images"),
-             envir = env)
-      tcltk::tkimage.create("photo",  tcltk::tclVar(),
-                            file=paste0(path, "/down.png"))
+      # one step up
+      as.character(
+        tcltk::tcl('button',
+                   as.character(loon::l_subwin(child, 'one step up button')),
+                   text = "up",
+                   bg = "grey92",
+                   borderwidth = 1,
+                   relief = "raised"))
     }
   )
 
   # one step down
-  onStepDownButton <-  as.character(
-    tcltk::tcl('button',
-               as.character(loon::l_subwin(child, 'one step down button')),
-               image = downbutton,
-               bg = "grey92",
-               borderwidth = 1,
-               relief = "raised"))
+  onStepDownButton <- tryCatch(
+    expr = {
+      path <- file.path(find.package(package = 'loon.tourr'), "images")
+      downbutton <- tcltk::tkimage.create("photo",  tcltk::tclVar(),
+                                          file=paste0(path, "/down.png"))
+      as.character(
+        tcltk::tcl('button',
+                   as.character(loon::l_subwin(child, 'one step down button')),
+                   image = downbutton,
+                   bg = "grey92",
+                   borderwidth = 1,
+                   relief = "raised"))
+    },
+    error = function(e) {
+      as.character(
+        tcltk::tcl('button',
+                   as.character(loon::l_subwin(child, 'one step down button')),
+                   text = "down",
+                   bg = "grey92",
+                   borderwidth = 1,
+                   relief = "raised"))
+    }
+  )
 
   rowcols <- tk_get_row_and_columns(p, by = by, title = list(...)$title)
 
