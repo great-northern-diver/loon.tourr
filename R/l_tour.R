@@ -12,7 +12,7 @@
 #' @param group Only used for layers. As we scroll the bar, the layers are re-calculated.
 #' This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).
 #' @param envir the \code{\link{environment}} to use.
-#' @import tourr methods stats loon tcltk loon.ggplot
+#' @import tourr methods stats loon tcltk loon.ggplot utils
 #' @details
 #' \itemize{
 #' \item {tour_path is a tour generator; available tours are \code{\link{grand_tour}},

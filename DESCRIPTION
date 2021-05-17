@@ -26,7 +26,6 @@ Imports:
     loon.ggplot
 Suggests:
     class,
-    RDRToolbox,
     magrittr,
     tidyverse,
     testthat,
