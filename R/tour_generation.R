@@ -18,14 +18,20 @@ interpolate_list <- function(data, start = NULL,
   projection <- list()
 
   for(i in seq(numOfTours)) {
-    end <- tour_path(start, data)
+    end <- quiet(tour_path(start, data))
     if(is.null(end)) break
+
+    if(is.function(end$interpolate))
+      interpolateFun <- end$interpolate
+    else
+      interpolateFun <- end$ingred$interpolate
+
     R <- lapply(seq(0, 1, length.out = interpolation),
                 function(i) {
-                  end$interpolate(i)
+                  interpolateFun(i)
                 })
     projection <- c(projection, R)
-    start <- end$interpolate(1L)
+    start <- interpolateFun(1L)
   }
 
   return(projection)
