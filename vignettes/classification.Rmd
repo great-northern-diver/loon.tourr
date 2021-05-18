@@ -92,13 +92,11 @@ path_concat <- function(path1, ..., sep="/") {
 }
 ```
 
-```{r, include=FALSE, warning=FALSE, eval = FALSE}
-library(RDRToolbox)
-```
+## Introduction
 
 A grand tour "method" is an algorithm for assigning a sequence of projections onto a lower dimensional spaces. After the original multivariate dataset is projected onto some "interesting" plane, a question may be raised here, "what's next?" 
 
-Well, one of the usage could be in "classification". Rather than putting the original data set into the classifier. Could an interesting projection improve the performance of the result, controlling other hyper-parameters? In this vignette, we will learn about it.
+Well, one of the usage could be in "classification". Rather than putting the original data set into the classifier. Controlling other hyper-parameters, can an interesting projection improve the performance of the prediction? In this vignette, we will learn about it.
 
 ## Data
 
@@ -114,11 +112,7 @@ data.frame(
   kable()
 ```
 
-## Task
-
-Task: can we project the data onto a lower dimensional space, meanwhile, each observation can be classified well by `Region` in such space?
-
-Step 1: randomly pick 80% of the data set as the training data and leave the rest 20% as the test data.
+First, we randomly select 80% as the training set and leave the rest 20% as the test set.
 
 ```{r split data, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center"}
 set.seed(123)
@@ -133,7 +127,7 @@ trainY <- olive[trainId, "region"]
 testY <- olive[testId, "region"]
 ```
 
-Step 2: scaling data set. As the magnitude of each variable is very different, to avoid one specific factor dominate the projection, a scaling technique should be applied ahead. In our case, we provide the `variable` scaling method that each column is scaled to zero one (the detailed description of different scaling can be found in `help("l_tour")`).
+Then, as the magnitude of each variable is very different, to avoid one specific factor dominate the projection, a scaling technique would be provided. In our case, the `variable` scaling method is applied that each variable is scaled to zero one (the detailed description of different scaling methods can be found in `l_tour` documentation `help("l_tour")`).
 
 ```{r scaling, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center"}
 row.names(trainX) <- NULL
@@ -145,7 +139,7 @@ kable(head(scalingTrainX), digits = 2)
 
 ## Projection Methods
 
-We decide to use one of the most basic (but efficient) classifier `knn` [@altman1992introduction] for all projection methods. 
+The classifier we used in this vignette is k-nearest neighborhood, `knn` [@altman1992introduction].
 
 ```{r xgboost, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center"}
 knn_pred <- function(trainX, trainY, testX, testY, k = c(5, 10, 20)) {
@@ -184,7 +178,7 @@ low_dim_knn_pred <- function(dims = 2:5, fun,
 
 ### Method I: p choose k
 
-The most basic projection is that we could choose $d$ from $p$ (where $d \leq p$, no linear combination) and map the $p$ dimensional space onto that chosen $d$ dimensional space. Since we have 8 dimensions, suppose $d = 2$, there are ${8 \choose 2} = 28$ combinations. To simplify the process, with each $d$, we will only extract the highest prediction pair. 
+The most basic projection is that to choose $d$ dimensional subspace from the $p$ dimensional space. Since we have 8 dimensions, suppose $d = 2$, there are ${8 \choose 2} = 28$ combinations. To simplify the process, with each pair, we will only extract the highest prediction accuracy one. 
 
 ```{r p choose k, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center"}
 # the number of k
@@ -197,7 +191,8 @@ pChooseD <- lapply(dims,
                      com <- combn(K, d)
                      pred <- apply(com, 2, 
                                    function(pair) {
-                                     knn_pred(trainX[, pair], trainY, testX[, pair], testY)
+                                     knn_pred(trainX[, pair], trainY, 
+                                              testX[, pair], testY)
                                    })
                      mean_pred <- apply(pred, 2, mean)
                      id <- which.max(mean_pred)
@@ -212,14 +207,14 @@ pChooseD <- lapply(dims,
 rownames(pChooseD) <- paste0("k = ", c(5, 10, 20))
 ```
 
-The best pairs names are
+The best pair's name is
 
 ```{r pairs}
 names(low_dim_names) <- paste0("d = ", dims)
 low_dim_names
 ```
 
-The prediction table is
+The prediction accuracy is
 
 ```{r nav graph prediction table}
 kable(pChooseD, row.names = TRUE,
@@ -242,7 +237,8 @@ The first 5 eigen values are picked, as the sum of them is above 85\%.
 
 ```{r PCA knn, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center"}
 PCA <- low_dim_knn_pred(2:5, 
-                        fun = function(princomp, d) {princomp$scores[, seq(d)]},
+                        fun = function(princomp, d) 
+                          {princomp$scores[, seq(d)]},
                         trainXPCA,
                         trainY,
                         testXPCA,
@@ -256,6 +252,7 @@ kable(PCA, row.names = TRUE,
 LLE (Local Linear Embedding) [@roweis2000nonlinear] begins by finding a set of the nearest neighbors of each point, then computes a set of weights for each point that best describes the point as a linear combination of its neighbors. Finally, it uses an eigenvector-based optimization technique to find the low-dimensional embedding of points.
 
 ```{r LLE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", eval = FALSE}
+library(RDRToolbox)
 lle <- low_dim_knn_pred(2:5, 
                         fun = function(data, d) {
                           LLE(data, dim = d, k = 5)
@@ -300,7 +297,7 @@ kable(as.data.frame(proj2D, row.names = colnames(trainX)),
       digits = 2)
 ```
 
-Then, we will create 3, 4 and 5 dimension tour paths (by modifying `tour_path`). The "interesting" projection could be that, on at least one axis, the three groups are split well. For example, in this 3D projection, at the axis V1, the group "gray" is distinguished from the team; at the axis V2, the group "pink" could be told significantly different from the rest; at the axis V3, the "blue" group is popped out. Such rules can be used in 4D and 5D projections as well.  
+Then, we will create 3, 4 and 5 dimension tour paths (by modifying `tour_path`). The "interesting" projection could be that, on at least one axis, the three groups are split well. For example, in this 3D projection, at the axis V1, the group "gray" is distinguished from the team; at the axis V2, the group "pink" could be told significantly different from the rest; at the axis V3, the "blue" group is popped up. 
 
 ```{r tour 3D, eval = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", out.width = "70%"}
 p3 <- l_tour(scalingTrainX, 
@@ -358,6 +355,52 @@ kable(tour, row.names = TRUE,
       digits = 3)
 ```
 
+However, sometimes, it is not possible to find a matrix of projection vectors to separate each group perfectly. We need a tool to monitor the classification performance of each projection. A powerful function `loon::l_bind_state()` could be used. It takes three arguments, `target`, `event` and a `callback` function. If changes are detected for the given event of this target, the `callback` function will be fired. In our case, *suppose it is very difficult to separate the 5D tour*, a callback function could be built as
+
+```{r bind_states, warning=FALSE, message=FALSE, echo=FALSE, eval = FALSE}
+callback <- function(W) {
+  # W is the widget path name
+  pred <- knn_pred(scalingTrainX %*% p5["projection"], 
+                   trainY, 
+                   scalingTestX %*% p5["projection"], 
+                   testY,
+                   k = c(5, 10, 20))
+  cat(
+    paste0(
+      "k = 5: accuracy rate ", round(pred[1], 3), "\n",
+      "k = 10: accuracy rate ", round(pred[2], 3), "\n",
+      "k = 20: accuracy rate ", round(pred[3], 3), "\n"
+    )
+  )
+}
+l_bind_state(target = l_getPlots(p5), 
+             event = "all", 
+             callback = callback)
+# [1] "stateBinding0"
+```
+
+As one scrolls the bar, the accuracy rates of each projection will be displayed in the console. The performance of each projection can be visualized very straightforward. In our scenario, the most "interesting" matrix of projection vectors should be corresponding to the highest accuracy rate. 
+
+================= R console =================
+
+\> ... 
+
+\> k = 5: accuracy rate 0.991 
+
+\> k = 10: accuracy rate 0.991 
+
+\> k = 20: accuracy rate 0.991 
+
+\> k = 5: accuracy rate 1 
+
+\> k = 10: accuracy rate 1 
+
+\> k = 20: accuracy rate 1 
+
+\> ...
+
+============================================
+
 ## Graphical Summaries
 
 ```{r graphical summary, warning=FALSE, message=FALSE, error=FALSE, fig.width=12, fig.height=6, fig.align="center", out.width = "70%"}
@@ -378,7 +421,7 @@ rbind(tour, lle, PCA, pChooseD) %>%
 
 Through this chart we can tell, 
 
-* In general, `tour` has the best performance. The accuracy of three dimensional tour with 10 or 20 neighbors can be **100\%**!
+* In general, `tour` has the best performance. The accuracy of three dimensional tour with 10 or 20 neighbors can be 100\%!
 
 * `LLE` has a good prediction as `d = 2`, nevertheless, as the dimension rises, the performance is worse than that of `PCA`.
 

@@ -13,6 +13,11 @@ l_layer_callback(target, layer, ...)
 
 \item{...}{some useful info for the layer configuration (i.e. tours, projections, etc)}
 }
+\value{
+this callback function does not return any object. As the
+slider bar is scrolled, for the specified layer, the callback function
+will be fired and the layer will be configured.
+}
 \description{
 Mainly used in the 2D (or 1D) tour interactive layer configuration
 }
@@ -38,6 +43,8 @@ if(interactive() && requireNamespace("tourr")) {
       loon::l_configure(layer,
                         x = den$x,
                         y = den$y)
+
+      invisible()
   }
 }
 

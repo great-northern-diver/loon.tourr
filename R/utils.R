@@ -51,3 +51,10 @@ get_scaledData <- function(data,
     fun(data = data, scaling = scaling)
   }
 }
+
+# suppress the `cat` or `print`
+quiet <- function(x) {
+  sink(tempfile())
+  on.exit(sink())
+  invisible(force(x))
+}

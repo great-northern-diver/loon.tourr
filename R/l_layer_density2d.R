@@ -4,7 +4,9 @@
 #' @inheritParams l_layer_hull
 #' @inheritParams MASS::kde2d
 #' @inheritParams loon::l_layer_contourLines
+#' @param color color of each contour
 #' @export
+#' @return an \code{l_layer} widget
 #' @examples
 #' if(interactive()) {
 #' p <- l_plot(iris, color = iris$Species)

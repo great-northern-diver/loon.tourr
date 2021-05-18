@@ -1,6 +1,5 @@
 #' @export
-#' @import loon.ggplot
-loon2ggplot.l_tour <- function(target, ...) {
+loon2ggplot.l_tour <- function(target, asAes = TRUE, ...) {
   widget <- l_getPlots(target)
-  loon.ggplot::loon2ggplot(widget, ...)
+  loon.ggplot::loon2ggplot(widget, asAes = asAes, ...)
 }

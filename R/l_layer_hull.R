@@ -19,6 +19,8 @@
 #'   \item {If they are not provided, the \code{x} will be inherited from the widget}
 #' }
 #'
+#' @return an \code{l_layer} widget
+#'
 #' @importFrom grDevices chull
 #' @export
 #' @examples

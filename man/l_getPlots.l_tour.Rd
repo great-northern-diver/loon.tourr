@@ -9,6 +9,9 @@
 \arguments{
 \item{target}{a \code{loon} object}
 }
+\value{
+a \code{loon} widget
+}
 \description{
 A generic function to query the \code{loon} (tcl) widget from the given target
 }
