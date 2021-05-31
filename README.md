@@ -1,5 +1,8 @@
 # loon.tourr <img src="man/figures/logo.png" align="right" width="120" />
 
+[![Travis build status](https://api.travis-ci.org/great-northern-diver/loon.tourr.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon.tourr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon.tourr)](https://cran.r-project.org/package=loon.tourr)
+
 ## Grand Tour
 
 The grand tour (*D.Asimov*) is a mechanism to randomly select a 2D projection in a `p` column space. Transitions between two serial projections are interpolated so that the rotating motion is smooth. It was first implemented in XGobi, GGobi (*D.Cook*, *D.F.Swayne*, *A.Buja*), then in `R` (package `tourr` *H.Wickham*, *D.Cook* and et al.)
