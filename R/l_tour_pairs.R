@@ -51,6 +51,13 @@ l_tour_pairs <- function(data, scaling = c('data', 'variable', 'observation', 's
     }
   )
 
+  ###### THIS IS A HACK IN `TOURR`! Hopefully, they can fix this later.
+  record <- tibble::tibble(basis = list(), index_val = numeric(),
+                           info = character(), method = character(),
+                           alpha = numeric(),
+                           tries = numeric(), loop = numeric())
+  ############################
+
   scaling <- match.arg(scaling)
   # data is n * d
   originalData <- data

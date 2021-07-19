@@ -2,9 +2,9 @@ interpolate_list <- function(data, start = NULL,
                              tour_path = tourr::grand_tour(), numOfTours = 30L,
                              interpolation = 10L) {
 
-  if(is.null(start))
+  if(is.null(start)) {
     start <- tour_path(NULL, data)
-  else {
+  } else {
 
     stopifnot(
       exprs = {
@@ -50,9 +50,11 @@ tour_list <- function(data, projection) {
 # avoid calculating p duplicated in the interactive process
 creat_start <- function(data, start, tour_path, d) {
 
-  if(is.null(start))
+  if(is.null(start)) {
+
     start <- tour_path(NULL, data)
-  else {
+
+  } else {
 
     stopifnot(
       exprs = {
