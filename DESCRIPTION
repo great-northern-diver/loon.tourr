@@ -23,7 +23,8 @@ Imports:
     utils,
     grDevices,
     MASS,
-    loon.ggplot
+    loon.ggplot,
+    tibble
 Suggests:
     class,
     magrittr,
