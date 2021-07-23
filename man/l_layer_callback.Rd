@@ -38,7 +38,7 @@ if(interactive() && requireNamespace("tourr")) {
   l_layer_callback.density <- function(target, layer, ...) {
 
       layer <- loon::l_create_handle(c(l_getPlots(target), layer))
-      den <- stats::density(x)
+      den <- stats::density(target['x'])
 
       loon::l_configure(layer,
                         x = den$x,

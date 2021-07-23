@@ -13,6 +13,7 @@
 #' This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).
 #' @param envir the \code{\link{environment}} to use.
 #' @import tourr methods stats loon tcltk loon.ggplot utils
+#' @importFrom tibble tibble
 #' @details
 #' \itemize{
 #' \item {tour_path is a tour generator; available tours are \code{\link{grand_tour}},
@@ -105,6 +106,13 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
       is.finite(interpolation)
     }
   )
+
+  ###### THIS IS A HACK IN `TOURR`! Hopefully, they can fix this later.
+  record <- tibble::tibble(basis = list(), index_val = numeric(),
+                           info = character(), method = character(),
+                           alpha = numeric(),
+                           tries = numeric(), loop = numeric())
+  ############################
 
   scaling <- match.arg(scaling)
   # the dimension of data set

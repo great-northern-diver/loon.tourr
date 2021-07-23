@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon.tourr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@ will be fired and the layer will be configured.</p>
   <span class='va'>l_layer_callback.density</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>target</span>, <span class='va'>layer</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
 
       <span class='va'>layer</span> <span class='op'>&lt;-</span> <span class='fu'>loon</span><span class='fu'>::</span><span class='fu'><a href='https://great-northern-diver.github.io/loon/reference/l_create_handle.html'>l_create_handle</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'>l_getPlots</span><span class='op'>(</span><span class='va'>target</span><span class='op'>)</span>, <span class='va'>layer</span><span class='op'>)</span><span class='op'>)</span>
-      <span class='va'>den</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/density.html'>density</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+      <span class='va'>den</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/density.html'>density</a></span><span class='op'>(</span><span class='va'>target</span><span class='op'>[</span><span class='st'>'x'</span><span class='op'>]</span><span class='op'>)</span>
 
       <span class='fu'>loon</span><span class='fu'>::</span><span class='fu'><a href='https://great-northern-diver.github.io/loon/reference/l_configure.html'>l_configure</a></span><span class='op'>(</span><span class='va'>layer</span>,
                         x <span class='op'>=</span> <span class='va'>den</span><span class='op'>$</span><span class='va'>x</span>,
