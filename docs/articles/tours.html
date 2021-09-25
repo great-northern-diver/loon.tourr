@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon.tourr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       <h1 data-toc-skip>Tour in Loon</h1>
                         <h4 class="author">Wayne Oldford and Zehao Xu</h4>
             
-            <h4 class="date">2021-07-23</h4>
+            <h4 class="date">2021-09-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/z267xu/loon.tourr/blob/master/vignettes/tours.Rmd"><code>vignettes/tours.Rmd</code></a></small>
       <div class="hidden name"><code>tours.Rmd</code></div>
@@ -109,7 +109,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>A tour is a motion graphic designed to study the joint distribution of multivariate data <span class="citation">(<a href="#ref-asimov1985grand" role="doc-biblioref">Asimov 1985</a>)</span><span class="citation">(<a href="#ref-buja1986grand" role="doc-biblioref">Andreas Buja and Asimov 1986</a>)</span>. A sequence of low-dimensional projections is created by a high dimensional data set. Tours are thus used to find interesting projections. Between each plane, interpolation along a geodesic path is provided so that the points in a sub space (e.g. 2D) can be rotated smoothly. In mathematics, <span class="math inline">\(\boldsymbol{X}_{n \times p}\)</span> represents the original data set; <span class="math inline">\(\boldsymbol{P}_{p \times d}\)</span> is the matrix of projection vectors where <span class="math inline">\(d &lt; p\)</span>. <span class="math display">\[\boldsymbol{Y} = \boldsymbol{X} \boldsymbol{P}\]</span> where <span class="math inline">\(\boldsymbol{Y}\)</span> is the lower dimensional sub-space.</p>
+<p>A tour is a motion graphic designed to study the joint distribution of multivariate data <span class="citation">(<a href="#ref-asimov1985grand" role="doc-biblioref">Asimov 1985</a>)</span><span class="citation">(<a href="#ref-buja1986grand" role="doc-biblioref">Andreas Buja and Asimov 1986</a>)</span>. A sequence of low-dimensional projections is created by a high dimensional data set. Tours are thus used to find interesting projections. Between each plane, interpolation along a geodesic path is provided so that the points in a sub space (e.g. 2D) can be rotated smoothly. In mathematics, <span class="math inline">\(\boldsymbol{X}_{n \times p}\)</span> represents the original data set; <span class="math inline">\(\boldsymbol{P}_{p \times d}\)</span> is the matrix of projection vectors where <span class="math inline">\(d &lt; p\)</span>. [ =  ] where <span class="math inline">\(\boldsymbol{Y}\)</span> is the lower dimensional sub-space.</p>
 <p>The tour was <strong>first</strong> implemented in the software <code>Dataviewer</code> <span class="citation">(<a href="#ref-buja1986elements" role="doc-biblioref">A. Buja, Asimov, and Hurley 1986</a>)</span><span class="citation">(<a href="#ref-hurley1987data" role="doc-biblioref">Hurley 1987</a>)</span><span class="citation">(<a href="#ref-buja1987data" role="doc-biblioref">Andreas Buja, Hurley, and McDonald 1987</a>)</span> in Symbolics Lisp machine. A smoothly moving scatterplot could be produced to visualize the tour paths. Then, <span class="citation"><a href="#ref-swayne1991xgobi" role="doc-biblioref">D. F. Swayne, Cook, and Buja</a> (<a href="#ref-swayne1991xgobi" role="doc-biblioref">1991</a>)</span> implemented software <code>XGobi</code> in the <strong>X</strong> Window System, providing portability across <strong>a wide variety of workstations</strong> i.e. X terminals, personal computers, even across a network. Software <code>GGobi</code> <span class="citation">(<a href="#ref-swayne2001ggobi" role="doc-biblioref">D. Swayne et al. 2001</a>)</span><span class="citation">(<a href="#ref-cook2007interactive" role="doc-biblioref">Cook, Swayne, and Buja 2007</a>)</span>, <strong>redesigned and extended</strong> its ancestor <code>XGobi</code>. It can be embedded in other software, like environment <code>R</code>. Package <code>rggobi</code> <span class="citation">(<a href="#ref-rggobi" role="doc-biblioref">Lang et al. 2018</a>)</span> is an <code>R</code> interface of <code>GGobi</code>, however, it has been removed from the CRAN and can only be accessed from the <a href="https://cran.r-project.org/src/contrib/Archive/rggobi/">archive</a>.</p>
 <p>Package <code>tourr</code> <span class="citation">(<a href="#ref-tourr" role="doc-biblioref">Wickham et al. 2011</a>)</span> implements geodesic interpolation and variety tour generation functions (i.e. grand tour, guided tour, etc) in <code>R</code> language. The function <code>animate</code> provides tour animation as a kinematic sequence of static displays – plots are generated and then displayed quickly in order. In an RStudio display, for example, the user can cycle back and forth through the sequence … but that is all. Unlike earlier tour implementations (<code>rggobi</code>) no interactive manipulation of the plot elements is possible.</p>
 <p>The loon package <span class="citation">(<a href="#ref-loon" role="doc-biblioref">Waddell and Oldford 2020</a>)</span> is a toolkit that enables highly interactive data visualization. The package <strong>loon.tourr</strong> adds the full functionality of loon’s interactive graphics to <code>tourr</code>. For example, this allows interactive selection, colouring, and deactivating of points in the tour display and linking that display with any other loon plot. Interesting projections discovered during the tour can be accessed at any point in the tour. In addition, random tours displaying more than 2 dimensions are also provided using parallel or radial coordinates and scatterplot matrices.</p>
@@ -203,7 +203,7 @@
 <li><p>The third is “observation,” where <span class="math inline">\(f(\mathbf{x}_i) = \frac{1}{c - d}(\mathbf{x}_i - d\mathbf{1})\)</span>, <span class="math inline">\(\boldsymbol{X} = {[{\mathbf{x}_{1}}^{\mkern-1.5mu\mathsf{T}}, ..., {\mathbf{x}_{n}}^{\mkern-1.5mu\mathsf{T}}]}^{\mkern-1.5mu\mathsf{T}}\)</span>, <span class="math inline">\(\mathbf{x}_{i}\)</span> is a <span class="math inline">\(p \times 1\)</span> vector, <span class="math inline">\(c = \max{(\mathbf{x}_i)}\)</span> and <span class="math inline">\(d = \min{(\mathbf{x}_i)}\)</span>;</p></li>
 <li><p>If the scaling method is “sphere,” where <span class="math inline">\(f(\boldsymbol{X}) = \boldsymbol{X}^\star \boldsymbol{V}\)</span> where <span class="math inline">\(\boldsymbol{X}^\star = (\boldsymbol{I} - \frac{1}{n}\mathbf{1}{\mathbf{1}}^{\mkern-1.5mu\mathsf{T}})\boldsymbol{X} = \boldsymbol{U} \boldsymbol{D} \boldsymbol{V}\)</span>.</p></li>
 </ul>
-<p>Notice that the tour is based on the transformed data set <span class="math display">\[\boldsymbol{Y} = f(\boldsymbol{X}) \boldsymbol{P}\]</span></p>
+<p>Notice that the tour is based on the transformed data set [ = f() ]</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"skyblue"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">crabs</span><span class="op">)</span><span class="op">)</span>
 <span class="va">color</span><span class="op">[</span><span class="va">crabs</span><span class="op">$</span><span class="va">sp</span> <span class="op">==</span> <span class="st">"O"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"orange"</span>
@@ -275,25 +275,25 @@ Figure 1: Andrews curve
 </li>
 <li>
 <p>Projection pursuit guided tour: a sequence of projections is guided by an algorithm in search of “interesting” projections by optimizing a criterion function</p>
-<p><span class="math display">\[\mathop{\mathrm{arg\,max}}g(\boldsymbol{Y}), \forall \boldsymbol{P}\]</span> where <span class="math inline">\(\boldsymbol{Y} = {[{\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_1, ..., {\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_n]}^{\mkern-1.5mu\mathsf{T}} = \boldsymbol{X} \boldsymbol{P}\)</span>, <span class="math inline">\(\mathbf{y}_j\)</span> is a <span class="math inline">\(p \times 1\)</span> vector.</p>
+<p>[g(), ] where <span class="math inline">\(\boldsymbol{Y} = {[{\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_1, ..., {\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_n]}^{\mkern-1.5mu\mathsf{T}} = \boldsymbol{X} \boldsymbol{P}\)</span>, <span class="math inline">\(\mathbf{y}_j\)</span> is a <span class="math inline">\(p \times 1\)</span> vector.</p>
 <ul>
 <li>
 <p>Holes:</p>
-<p><span class="math display">\[g(\boldsymbol{Y}) = \frac{1 - \frac{1}{n}\sum_{i=1}^n \exp(-\frac{1}{2}{\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_i\mathbf{y}_i)}{1 - \exp{(-\frac{p}{2})}}\]</span></p>
+<p>[g() = ]</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 2D holes projection pursuit indexes</span>
 <span class="va">pp_holes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_tour.html">l_tour</a></span><span class="op">(</span><span class="va">cr</span>, tour_path <span class="op">=</span> <span class="fu">guided_tour</span><span class="op">(</span><span class="fu">holes</span><span class="op">(</span><span class="op">)</span>, <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
 <p>Central Mass:</p>
-<p><span class="math display">\[g(\boldsymbol{Y}) = \frac{\frac{1}{n}\sum_{i=1}^n \exp(-\frac{1}{2}{\mathbf{y}}^{\mkern-1.5mu\mathsf{T}}_i \mathbf{y}_i) - \exp{(-\frac{p}{2})}}{1 - \exp{(-\frac{p}{2})}}\]</span></p>
+<p>[g() = ]</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 2D CM projection pursuit indexes</span>
 <span class="va">pp_CM</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_tour.html">l_tour</a></span><span class="op">(</span><span class="va">cr</span>, tour_path <span class="op">=</span> <span class="fu">guided_tour</span><span class="op">(</span><span class="fu">cmass</span><span class="op">(</span><span class="op">)</span>, <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
 <p>LDA</p>
-<p><span class="math display">\[g(\boldsymbol{Y}) = 1 - \frac{|{\boldsymbol{P}}^{\mkern-1.5mu\mathsf{T}}\boldsymbol{W}\boldsymbol{P}|}{|{\boldsymbol{P}}^{\mkern-1.5mu\mathsf{T}}(\boldsymbol{W} + \boldsymbol{B})\boldsymbol{P}|}\]</span></p>
+<p>[g() = 1 - ]</p>
 <p>where <span class="math inline">\(\boldsymbol{B} = \sum_{i=1}^k n_i (\bar{y}_{i.} - \bar{y}_{..}) {(\bar{y}_{i.} - \bar{y}_{..})}^{\mkern-1.5mu\mathsf{T}}\)</span>, <span class="math inline">\(\boldsymbol{W} = \sum_{i=1}^k \sum_{j=1}^{n_i} n_i (\bar{y}_{ij} - \bar{y}_{i.}) {(\bar{y}_{ij} - \bar{y}_{i.})}^{\mkern-1.5mu\mathsf{T}}\)</span> and <span class="math inline">\(k\)</span> is the number of groups.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 2D LDA projection pursuit indexes</span>
