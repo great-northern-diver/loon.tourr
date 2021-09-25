@@ -14,6 +14,8 @@ l_tour(
   tour_path = tourr::grand_tour(),
   group = "color",
   start = NULL,
+  slicing = FALSE,
+  slicingDistance = NULL,
   numOfTours = 30L,
   interpolation = 40L,
   parent = NULL,
@@ -44,11 +46,18 @@ typically the environment from which the function is called.}
 
 \item{tour_path}{tour path generator, defaults to 2d grand tour}
 
-\item{group}{Only used for layers. As we scroll the bar, the layers are re-calculated.
+\item{group}{only used for layers. As we scroll the bar, the layers are re-calculated.
 This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).}
 
 \item{start}{projection to start at, if not specified, uses default
 associated with tour path}
+
+\item{slicing}{whether to show a sliced scatter plot}
+
+\item{slicingDistance}{the slicing distance that if the distance between
+points and the projected plane is less than this distance, points will be
+preserved; else points will be invisible. The default is \code{NULL} and a suggested
+value will be given. See details}
 
 \item{numOfTours}{the number of tours}
 
@@ -97,6 +106,12 @@ variable \tab per column scaling\cr
 observation \tab per row scaling\cr
 data \tab whole matrix scaling\cr
 sphere \tab transforming variables to principal components}}
+\item {The default \code{slidingDistance} is suggested by Laa, U., Cook, D., & Valencia, G. (2020).
+First, find the maximum Euclidean distance of each observation (centralized), say \code{maxD}.
+Then, compute the "relative volume" that \code{vRel} = (\code{maxD}^(d - 2))/10, where \code{d}
+is the dimension of this data set. In the end, the suggested \code{slidingDistance}
+is given by \code{vRel}^(1/(d - 2))
+}
 }
 }
 \examples{
