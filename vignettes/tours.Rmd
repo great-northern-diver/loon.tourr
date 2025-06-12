@@ -84,13 +84,6 @@ library(MASS)
 set.seed(12314159)
 imageDirectory <- "./images/tours"
 dataDirectory <- "./data/tours"
-path_concat <- function(path1, ..., sep="/") {
-  # The "/" is standard unix directory separator and so will
-  # work on Macs and Linux.
-  # In windows the separator might have to be sep = "\" or 
-  # even sep = "\\" or possibly something else. 
-  paste(path1, ..., sep = sep)
-}
 ```
 
 ```{r library loon.tourr, warning=FALSE, message=FALSE, error=FALSE}
@@ -141,7 +134,7 @@ p0 <- l_tour(cr, color = color)
 ```
 
 ```{r crabs 2D gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 1: 2D grand tour"}
-include_graphics(path_concat(imageDirectory, "crab2D.gif"))
+include_graphics(file.path(imageDirectory, "crab2D.gif"))
 ```
 
 The projection dimension (the dimension of the $\sm{P}$) is controlled by `tour_path = grand_tour(d)` where $d$ represents the dimensions and the default is $2$. Unlike the 2 dimensional Cartesian coordinate, higher dimensional space ($>2$) will be embedded in the parallel coordinate or radial coordinate. In GIF 2, the $d$ is set as 4. 
@@ -153,7 +146,7 @@ p1 <- l_tour(cr,
 ```
 
 ```{r crabs 4D gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 2: 4D grand tour"}
-include_graphics(path_concat(imageDirectory, "crab4D.gif"))
+include_graphics(file.path(imageDirectory, "crab4D.gif"))
 ```
 
 An `l_tour` object is returned by `p1` (or `p0`).
@@ -210,7 +203,7 @@ loon.ggplot::loon.ggplot(p1)
 
 
 ```{r crabs andrews, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "Figure 1: Andrews curve"}
-include_graphics(path_concat(imageDirectory, "andrews.png"))
+include_graphics(file.path(imageDirectory, "andrews.png"))
 ```
 
 To investigate more about `loon`, please visit [great-northern-diver-loon](https://great-northern-diver.github.io/loon/index.html).
@@ -281,7 +274,7 @@ pf <- l_tour(cr,
 ```
 
 ```{r crabs facets gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 3: facets"}
-include_graphics(path_concat(imageDirectory, "facets.gif"))
+include_graphics(file.path(imageDirectory, "facets.gif"))
 ```
 
 ### Pairs plot
@@ -296,7 +289,7 @@ pp <- l_tour_pairs(cr,
 ```
 
 ```{r crabs pairs gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 4: pairs plot"}
-include_graphics(path_concat(imageDirectory, "pairs.gif"))
+include_graphics(file.path(imageDirectory, "pairs.gif"))
 ```
 
 Tour compound plot is a `l_tour_compound` object
@@ -369,7 +362,7 @@ l0 <- l_layer_hull(p0, group = crabs$sp)
 The argument `group` is used to clarify the group of the set in each hull. Suppose we want to find a projection that splits the crab species well, layering the hull could be extremely useful. If two hulls have no intersections, this projection could be the one we are looking for.
 
 ```{r hull gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 5: layer hull"}
-include_graphics(path_concat(imageDirectory, "hull.gif"))
+include_graphics(file.path(imageDirectory, "hull.gif"))
 ```
 
 ### `l_layer_density2d`
@@ -384,7 +377,7 @@ l1 <- l_layer_density2d(p0)
 ```
 
 ```{r density 2D gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 5: layer density"}
-include_graphics(path_concat(imageDirectory, "density2D.gif"))
+include_graphics(file.path(imageDirectory, "density2D.gif"))
 ```
 
 ### `l_layer_trails`
@@ -399,7 +392,7 @@ l2 <- l_layer_trails(p0)
 ```
 
 ```{r crabs trails gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 5: layer density"}
-include_graphics(path_concat(imageDirectory, "trails.gif"))
+include_graphics(file.path(imageDirectory, "trails.gif"))
 ```
 
 The trails can show the direction of the projection. Meanwhile, the lengths of tails represent the steps of each transformation.
@@ -424,7 +417,7 @@ layers <- lapply(l_getPlots(pf),
 ```
 
 ```{r non-interactive layer gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "Figure 2: non-interactive layer"}
-include_graphics(path_concat(imageDirectory, "tour_layer_non_interactive.PNG"))
+include_graphics(file.path(imageDirectory, "tour_layer_non_interactive.PNG"))
 ```
 
 When the tour changes, this static layer does not change correspondingly (in GIF 6). To make it interactive, we have to create the following `S3` function, by setting its class as **background**. The parameters of this function are
@@ -492,7 +485,7 @@ l_layer_callback.background <- function(target, layer, ...) {
 ```
 
 ```{r interactive layer gif, echo = FALSE, warning=FALSE, message=FALSE, error=FALSE, fig.width=4, fig.height=3, fig.align="center", fig.cap = "GIF 7: interactive layer"}
-include_graphics(path_concat(imageDirectory, "tour_layer_interactive.gif"))
+include_graphics(file.path(imageDirectory, "tour_layer_interactive.gif"))
 ```
 
 After function `l_layer_callback.background` is created and executed, the layer is interactive.
