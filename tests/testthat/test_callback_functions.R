@@ -20,13 +20,19 @@ test_that("test callback l_plot", {
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
+                tours = tours, var = var, projections = projections)
+
+  expect_true(l_isLoonWidget(widget))
+
+  callback_plot(widget = widget, initialTour = initialTour, data = ir,
+                start = start, color = color, group = group, slicing = TRUE,
                 tours = tours, var = var, projections = projections)
 
   expect_true(l_isLoonWidget(widget))
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = 0L, projections = projections)
   expect_equal(initialTour$x, widget['x'])
 })
@@ -49,13 +55,20 @@ test_that("test callback l_plot", {
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
+                tours = tours, var = var, projections = projections)
+
+  expect_true(l_isLoonWidget(widget))
+
+
+  callback_plot(widget = widget, initialTour = initialTour, data = ir,
+                start = start, color = color, group = group, slicing = TRUE,
                 tours = tours, var = var, projections = projections)
 
   expect_true(l_isLoonWidget(widget))
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = 0L, projections = projections)
   expect_equal(initialTour$x, widget['x'])
 })
@@ -79,13 +92,19 @@ test_that("test callback l_hist", {
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group,  slicing = FALSE,
+                tours = tours, var = var, projections = projections)
+
+  expect_true(l_isLoonWidget(widget))
+
+  callback_plot(widget = widget, initialTour = initialTour, data = ir,
+                start = start, color = color, group = group,  slicing = TRUE,
                 tours = tours, var = var, projections = projections)
 
   expect_true(l_isLoonWidget(widget))
 
   callback_plot(widget = widget, initialTour = unlist(initialTour),
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = 0L, projections = projections)
   expect_equal(initialTour$x, widget['x'])
 })
@@ -109,13 +128,13 @@ test_that("test callback l_serialaxes", {
   tours <- tour_list(ir, projections)
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = var, projections = projections)
 
   expect_true(l_isLoonWidget(widget))
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = 0L, projections = projections)
   expect_equal(initialTour, char2num.data.frame(widget['data']))
 })
@@ -148,14 +167,14 @@ test_that("test callback l_facet", {
                   })
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = var, projections = projections,
                 by = by)
 
   expect_true(is(widget, "l_compound"))
 
   callback_plot(widget = widget, initialTour = initialTour,
-                start = start, color = color, group = group,
+                start = start, color = color, group = group, slicing = FALSE,
                 tours = tours, var = 0L, projections = projections)
   expect_equal(initialTour[[1]]$Sepal.Length, widget[[1]]["x"])
 })
@@ -199,4 +218,19 @@ test_that("test callback scaling and refresh", {
   expect_equal(length(projections), 1200L)
   callback_refresh(count = 1L, data = get_scaledData(iris[, -5], "data"))
   expect_equal(length(projections), 1200L)
+})
+
+test_that("test slicing", {
+  data <- iris[, -5]
+  proj <- matrix(c(1,rep(0, 3), 0, 1, rep(0, 2)), nrow = 4)
+  expect_equal(sum(anchored_orthogonal_distance(proj, data)),
+               sum(tourr::anchored_orthogonal_distance(proj, data)))
+
+  # 1 dim
+  proj <- matrix(c(1,rep(0, 3)), nrow = 4)
+  expect_equal(round(sum(anchored_orthogonal_distance(proj, data))), 268)
+  # 3 dim
+  proj <- matrix(c(1,rep(0, 3), 0, 1, rep(0, 2),
+                   0,0,1,0), nrow = 4)
+  expect_equal(round(sum(anchored_orthogonal_distance(proj, data))), 99)
 })

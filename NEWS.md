@@ -1,6 +1,10 @@
+# loon.tourr 0.1.3
+
+`section` tour is implemented (not for compound widgets yet)
+
 # loon.tourr 0.1.2
 
-To accommodate the changes in the new version of `tourr` that, for `guided_tour()`, users have to define a tibble `record` in the `parent.frame()` environment, else error occurs.  
+To accommodate the changes in the new version of `tourr` that, for `guided_tour()`, users have to define a tibble `record` in the `parent.frame()` environment, else error occurs.
 
 # loon.tourr 0.1.1
 

@@ -1,6 +1,5 @@
 # loon.tourr <img src="man/figures/logo.png" align="right" width="120" />
 
-[![Travis build status](https://api.travis-ci.com/great-northern-diver/loon.tourr.svg?branch=master)](https://travis-ci.com/great-northern-diver/loon.tourr)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon.tourr)](https://cran.r-project.org/package=loon.tourr)
 
 ## Grand Tour

@@ -82,7 +82,7 @@ in the bottom left of the pairs plot (or not)}
 
 \item{color}{vector with line colors. Default is given by \code{\link[loon]{l_getOption}("color")}.}
 
-\item{group}{Only used for layers. As we scroll the bar, the layers are re-calculated.
+\item{group}{only used for layers. As we scroll the bar, the layers are re-calculated.
 This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).}
 
 \item{start}{projection to start at, if not specified, uses default

@@ -9,8 +9,13 @@
 #' the smoother the transitions would be.
 #' @param scaling one of 'variable', 'data', 'observation', 'sphere', or 'none' to specify how the data is scaled.
 #' See Details
-#' @param group Only used for layers. As we scroll the bar, the layers are re-calculated.
+#' @param group only used for layers. As we scroll the bar, the layers are re-calculated.
 #' This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).
+#' @param slicing whether to show a sliced scatter plot
+#' @param slicingDistance the slicing distance that if the distance between
+#' points and the projected plane is less than this distance, points will be
+#' preserved; else points will be invisible. The default is \code{NULL} and a suggested
+#' value will be given. See details
 #' @param envir the \code{\link{environment}} to use.
 #' @import tourr methods stats loon tcltk loon.ggplot utils
 #' @importFrom tibble tibble
@@ -40,6 +45,12 @@
 #' observation \tab per row scaling\cr
 #' data \tab whole matrix scaling\cr
 #' sphere \tab transforming variables to principal components}}
+#' \item {The default \code{slidingDistance} is suggested by Laa, U., Cook, D., & Valencia, G. (2020).
+#' First, find the maximum Euclidean distance of each observation (centralized), say \code{maxD}.
+#' Then, compute the "relative volume" that \code{vRel} = (\code{maxD}^(d - 2))/10, where \code{d}
+#' is the dimension of this data set. In the end, the suggested \code{slidingDistance}
+#' is given by \code{vRel}^(1/(d - 2))
+#' }
 #' }
 #' @return an \code{l_tour} or an \code{l_tour_compound} object that
 #' one can query the \code{loon} states and a matrix projection vectors
@@ -94,6 +105,7 @@
 l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'),
                    by = NULL, on, as.l_tour = TRUE, color = loon::l_getOption("color"),
                    tour_path = tourr::grand_tour(), group = "color", start = NULL,
+                   slicing = FALSE, slicingDistance = NULL,
                    numOfTours = 30L, interpolation = 40L, parent = NULL,
                    envir = parent.frame(), ...) {
 
@@ -351,6 +363,38 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
     p
   }
 
+  states <- l_getNDimStates(p)
+  statesNames <- names(states)
+
+  if(slicing) {
+
+    slicingDistance <- get_slicingDistance(slicingDistance,
+                                           originalData, d)
+    suppressMessages(
+      loon::l_bind_state(p, event = c("glyph", "color", "selected",
+                                      "active", "size"),
+                         callback = function(e) {
+
+                           original.linkingKey <- states$linkingKey
+                           current.linkingKey <- p['linkingKey']
+
+                           states <<- stats::setNames(
+                             lapply(statesNames,
+                                    function(name) {
+
+                                      s <- states[[name]]
+                                      if(name == "data") {
+                                        s[original.linkingKey %in% current.linkingKey, ] <- p[name]
+                                      } else {
+                                        s[original.linkingKey %in% current.linkingKey] <- p[name]
+                                      }
+                                      s
+                                    }),
+                             statesNames)
+                         })
+    )
+  }
+
   l_object_name <- character(0L)
 
   update <- function(...) {
@@ -434,9 +478,9 @@ l_tour <- function(data, scaling = c('data', 'variable', 'observation', 'sphere'
     callback_plot(widget = p, initialTour = initialTour, tours = tours, var = var,
                   data = originalData, start = start, color = color, group = group,
                   varOld = varOld, projections = projections,
-                  axesLength = axesLength,
-                  axes = axes, labels = labels)
-
+                  axesLength = axesLength, axes = axes, labels = labels,
+                  states = states, slicing = slicing,
+                  slicingDistance = slicingDistance)
 
     # step <<- step + 1
     varOld <<- var
