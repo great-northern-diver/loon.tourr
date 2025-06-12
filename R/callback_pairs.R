@@ -66,11 +66,6 @@ callback_pairs <- function(widget, initialTour, tours, var = 0L, ...) {
                          allColor = color,
                          allProjections = projections,
                          allInitialTour = initialTour)
-
-           if(inherits(w, "l_plot") || inherits(w, "l_hist")) {
-             loon::l_scaleto_world(w)
-           }
-
          })
 
   return(invisible())

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon.tourr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -153,6 +153,8 @@
   tour_path <span class='op'>=</span> <span class='fu'>tourr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tourr/man/grand_tour.html'>grand_tour</a></span><span class='op'>(</span><span class='op'>)</span>,
   group <span class='op'>=</span> <span class='st'>"color"</span>,
   start <span class='op'>=</span> <span class='cn'>NULL</span>,
+  slicing <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  slicingDistance <span class='op'>=</span> <span class='cn'>NULL</span>,
   numOfTours <span class='op'>=</span> <span class='fl'>30L</span>,
   interpolation <span class='op'>=</span> <span class='fl'>40L</span>,
   parent <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -201,13 +203,24 @@ typically the environment from which the function is called.</p></td>
     </tr>
     <tr>
       <th>group</th>
-      <td><p>Only used for layers. As we scroll the bar, the layers are re-calculated.
+      <td><p>only used for layers. As we scroll the bar, the layers are re-calculated.
 This argument is used to specify which state is used to set groups (i.e. "color", "linewidth", etc).</p></td>
     </tr>
     <tr>
       <th>start</th>
       <td><p>projection to start at, if not specified, uses default
 associated with tour path</p></td>
+    </tr>
+    <tr>
+      <th>slicing</th>
+      <td><p>whether to show a sliced scatter plot</p></td>
+    </tr>
+    <tr>
+      <th>slicingDistance</th>
+      <td><p>the slicing distance that if the distance between
+points and the projected plane is less than this distance, points will be
+preserved; else points will be invisible. The default is <code>NULL</code> and a suggested
+value will be given. See details</p></td>
     </tr>
     <tr>
       <th>numOfTours</th>
@@ -267,6 +280,11 @@ are then
 <tr><td>data</td><td>whole matrix scaling</td></tr>
 <tr><td>sphere</td><td>transforming variables to principal components</td></tr>
 </table></p></li>
+<li><p>The default <code>slidingDistance</code> is suggested by Laa, U., Cook, D., &amp; Valencia, G. (2020).
+First, find the maximum Euclidean distance of each observation (centralized), say <code>maxD</code>.
+Then, compute the "relative volume" that <code>vRel</code> = (<code>maxD</code>^(d - 2))/10, where <code>d</code>
+is the dimension of this data set. In the end, the suggested <code>slidingDistance</code>
+is given by <code>vRel</code>^(1/(d - 2))</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
